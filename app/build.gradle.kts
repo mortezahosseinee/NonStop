@@ -74,6 +74,9 @@ dependencies {
     implementation(LibraryDependency.PLAY_CORE)
     implementation(LibraryDependency.STETHO)
     implementation(LibraryDependency.STETHO_OK_HTTP)
+    implementation(LibraryDependency.SMART_TAB_LAYOUT)
+    implementation(LibraryDependency.SMART_TAB_LAYOUT_UTILS)
+    implementation(LibraryDependency.ZXING)
 
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFIT_MOSHI_CONVERTER)
