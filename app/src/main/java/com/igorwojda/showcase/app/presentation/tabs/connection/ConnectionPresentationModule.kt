@@ -12,17 +12,9 @@ import org.kodein.di.generic.singleton
 
 internal val presentationModule = Kodein.Module("${MODULE_NAME}PresentationModule") {
 
-    // AlbumList
     bind<ConnectionViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
         KotlinViewModelProvider.of(context) { ConnectionViewModel() }
     }
 
-//    bind() from singleton { AlbumAdapter() }
-
     bind() from singleton { ImageLoader(instance()) }
-
-    // AlbumDetails
-//    bind<AlbumDetailViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-//        KotlinViewModelProvider.of(context) { AlbumDetailViewModel(instance(), instance()) }
-//    }
 }

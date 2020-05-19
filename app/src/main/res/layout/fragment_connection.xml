@@ -87,6 +87,7 @@
             android:id="@+id/img_bluetooth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"

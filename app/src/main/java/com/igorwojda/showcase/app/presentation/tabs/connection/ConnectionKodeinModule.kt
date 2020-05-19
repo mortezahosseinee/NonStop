@@ -5,7 +5,7 @@ import com.igorwojda.showcase.app.domain.domainModule
 import com.igorwojda.showcase.app.feature.KodeinModuleProvider
 import org.kodein.di.Kodein
 
-internal const val MODULE_NAME = "QRCode"
+internal const val MODULE_NAME = "Connection"
 
 object ConnectionKodeinModule : KodeinModuleProvider {
 

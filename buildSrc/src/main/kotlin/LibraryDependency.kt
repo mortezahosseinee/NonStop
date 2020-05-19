@@ -5,9 +5,10 @@ private object LibraryVersion {
     const val RETROFIT = "2.7.1"
     const val OK_HTTP = "4.3.1"
     const val STETHO = "1.5.0"
-    const val SMART_TAB_LAYOUT = "2.0.0@aar"
     const val ZXING = "1.9.8"
     const val CIRCULAR_PROGRESS_BAR = "3.0.3"
+    const val PAHO_CLIENT = "1.2.1"
+    const val PAHO_SERVICE = "1.1.1"
     const val TIMBER = "4.7.1"
     const val PLAY_CORE = "1.6.4"
     const val APP_COMPAT = "1.1.0"
@@ -44,11 +45,10 @@ object LibraryDependency {
     const val STETHO = "com.facebook.stetho:stetho:${LibraryVersion.STETHO}"
     const val STETHO_OK_HTTP = "com.facebook.stetho:stetho-okhttp3:${LibraryVersion.STETHO}"
 
-    const val SMART_TAB_LAYOUT = "com.ogaclejapan.smarttablayout:library:${LibraryVersion.SMART_TAB_LAYOUT}"
-    const val SMART_TAB_LAYOUT_UTILS = "com.ogaclejapan.smarttablayout:utils-v4:${LibraryVersion.SMART_TAB_LAYOUT}"
-
     const val ZXING = "me.dm7.barcodescanner:zxing:${LibraryVersion.ZXING}"
     const val CIRCULAR_PROGRESS_BAR = "com.mikhaellopez:circularprogressbar:${LibraryVersion.CIRCULAR_PROGRESS_BAR}"
+    const val PAHO_CLIENT = "org.eclipse.paho:org.eclipse.paho.client.mqttv3:${LibraryVersion.PAHO_CLIENT}"
+    const val PAHO_SERVICE = "org.eclipse.paho:org.eclipse.paho.android.service:${LibraryVersion.PAHO_SERVICE}"
 
     const val TIMBER = "com.jakewharton.timber:timber:${LibraryVersion.TIMBER}"
     const val SUPPORT_CONSTRAINT_LAYOUT =

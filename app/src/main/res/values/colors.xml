@@ -10,7 +10,7 @@
 
     <color name="color_progress_background">#878787</color>
 
-    <color name="color_connection_disconnected">#F44336</color>
+    <color name="color_connection_disconnected">#878787</color>
     <color name="color_connection_connecting">#FFEB3B</color>
     <color name="color_connection_connected">#4CAF50</color>
 

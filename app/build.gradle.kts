@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
+import com.android.build.gradle.internal.dsl.PackagingOptions
 
 plugins {
     id(GradlePluginId.ANDROID_APPLICATION)
@@ -74,10 +75,11 @@ dependencies {
     implementation(LibraryDependency.PLAY_CORE)
     implementation(LibraryDependency.STETHO)
     implementation(LibraryDependency.STETHO_OK_HTTP)
-    implementation(LibraryDependency.SMART_TAB_LAYOUT)
-    implementation(LibraryDependency.SMART_TAB_LAYOUT_UTILS)
     implementation(LibraryDependency.ZXING)
     implementation(LibraryDependency.CIRCULAR_PROGRESS_BAR)
+
+    implementation(LibraryDependency.PAHO_CLIENT)
+    implementation(LibraryDependency.PAHO_SERVICE)
 
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFIT_MOSHI_CONVERTER)

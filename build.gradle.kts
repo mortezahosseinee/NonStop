@@ -20,6 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven(url = "https://repo.eclipse.org/content/repositories/paho-snapshots/")
     }
 
     // We want to apply ktlint at all project level because it also checks build gradle files
