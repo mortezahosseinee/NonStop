@@ -1,18 +1,11 @@
 <resources>
     <string name="app_name">showcase</string>
 
-    <!--Dynamic module titles-->
-    <string name="feature_album" translatable="false">feature album</string>
-
-    <!--Bottom menu-->
-    <string name="albums">Albums</string>
-    <string name="favorites">Favorites</string>
-    <string name="profile">Profile</string>
-
     <string name="qr_code_tab">کد QR</string>
     <string name="connection_tab">اتصال</string>
     <string name="shortcut_tab">میانبرها</string>
     <string name="log_tab">تاریخچه</string>
     <string name="choose_the_floor">طبقه مورد نظر را انتخاب کنید:</string>
+    <string name="choose_the_connection">روش اتصال را انتخاب کنید:</string>
 
 </resources>

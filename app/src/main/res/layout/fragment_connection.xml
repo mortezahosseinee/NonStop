@@ -6,25 +6,147 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/txv_choose_floor"
+        android:id="@+id/txv_choose_connection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:gravity="center"
-        android:text="روش اتصال را انتخاب کنید."
-        android:textColor="#fff"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:text="@string/choose_the_connection"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lnl_connection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_choose_connection">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_sms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/img_internet"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_sms" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/cpb_sms"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cpb_background_progressbar_color="@color/color_progress_background"
+            app:cpb_background_progressbar_width="4dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progress_max="25"
+            app:cpb_progressbar_color="@color/colorAccent"
+            app:cpb_progressbar_width="8dp"
+            app:cpb_round_border="true"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sms"
+            app:layout_constraintEnd_toEndOf="@+id/img_sms"
+            app:layout_constraintStart_toStartOf="@+id/img_sms"
+            app:layout_constraintTop_toTopOf="@+id/img_sms" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_internet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_internet" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/cpb_internet"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cpb_background_progressbar_color="@color/color_progress_background"
+            app:cpb_background_progressbar_width="4dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progressbar_color="@color/colorAccent"
+            app:cpb_progressbar_width="8dp"
+            app:cpb_round_border="true"
+            app:layout_constraintBottom_toBottomOf="@+id/img_internet"
+            app:layout_constraintEnd_toEndOf="@+id/img_internet"
+            app:layout_constraintStart_toStartOf="@+id/img_internet"
+            app:layout_constraintTop_toTopOf="@+id/img_internet" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_bluetooth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_internet"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_bluetooth" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/cpb_bluetooth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cpb_background_progressbar_color="@color/color_progress_background"
+            app:cpb_background_progressbar_width="4dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progressbar_color="@color/colorAccent"
+            app:cpb_progressbar_width="8dp"
+            app:cpb_round_border="true"
+            app:layout_constraintBottom_toBottomOf="@+id/img_bluetooth"
+            app:layout_constraintEnd_toEndOf="@+id/img_bluetooth"
+            app:layout_constraintStart_toStartOf="@+id/img_bluetooth"
+            app:layout_constraintTop_toTopOf="@+id/img_bluetooth" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txv_choose_floor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:text="@string/choose_the_floor"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnl_connection" />
 
     <NumberPicker
         android:id="@+id/npk_floor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:theme="@style/AppTheme.Picker"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/txv_choose_floor"
         app:layout_constraintStart_toStartOf="@+id/txv_choose_floor"
         app:layout_constraintTop_toBottomOf="@+id/txv_choose_floor" />
+
+    <Button
+        android:id="@+id/btn_send_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="ارسال فرمان"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/npk_floor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

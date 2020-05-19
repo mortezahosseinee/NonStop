@@ -7,4 +7,13 @@
     <color name="iconColor">@color/white</color>
     <color name="textColor">@color/white</color>
     <color name="tab_layout_background">#C8C8C8</color>
+
+    <color name="color_progress_background">#878787</color>
+
+    <color name="color_connection_disconnected">#F44336</color>
+    <color name="color_connection_connecting">#FFEB3B</color>
+    <color name="color_connection_connected">#4CAF50</color>
+
+    <color name="color_snackbar_background">#121212</color>
+
 </resources>

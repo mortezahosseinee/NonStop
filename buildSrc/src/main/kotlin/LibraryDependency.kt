@@ -7,6 +7,7 @@ private object LibraryVersion {
     const val STETHO = "1.5.0"
     const val SMART_TAB_LAYOUT = "2.0.0@aar"
     const val ZXING = "1.9.8"
+    const val CIRCULAR_PROGRESS_BAR = "3.0.3"
     const val TIMBER = "4.7.1"
     const val PLAY_CORE = "1.6.4"
     const val APP_COMPAT = "1.1.0"
@@ -47,6 +48,7 @@ object LibraryDependency {
     const val SMART_TAB_LAYOUT_UTILS = "com.ogaclejapan.smarttablayout:utils-v4:${LibraryVersion.SMART_TAB_LAYOUT}"
 
     const val ZXING = "me.dm7.barcodescanner:zxing:${LibraryVersion.ZXING}"
+    const val CIRCULAR_PROGRESS_BAR = "com.mikhaellopez:circularprogressbar:${LibraryVersion.CIRCULAR_PROGRESS_BAR}"
 
     const val TIMBER = "com.jakewharton.timber:timber:${LibraryVersion.TIMBER}"
     const val SUPPORT_CONSTRAINT_LAYOUT =

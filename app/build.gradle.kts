@@ -77,6 +77,7 @@ dependencies {
     implementation(LibraryDependency.SMART_TAB_LAYOUT)
     implementation(LibraryDependency.SMART_TAB_LAYOUT_UTILS)
     implementation(LibraryDependency.ZXING)
+    implementation(LibraryDependency.CIRCULAR_PROGRESS_BAR)
 
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFIT_MOSHI_CONVERTER)
