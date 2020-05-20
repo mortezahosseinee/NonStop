@@ -1,6 +1,7 @@
 package com.project.son.app.helper.classes
 
 import android.content.Context
+import android.text.Editable
 import com.project.son.app.helper.interfaces.IMQTTListener
 import com.project.son.app.helper.model.FailureModel
 import com.project.son.app.helper.model.MessageModel
@@ -101,9 +102,12 @@ class MQTTHandler {
 
         fun publish(
             mIMQTTListener: IMQTTListener?,
+            topic: String,
             command: ByteArray
         ) {
             _mPublisherIMQTTListener = mIMQTTListener
+            publishTopic = topic
+
             var mPublishToken: IMqttDeliveryToken? = null
             try {
                 mPublishToken = client?.publish(

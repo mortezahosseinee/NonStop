@@ -1,6 +1,5 @@
 import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
-import com.android.build.gradle.internal.dsl.PackagingOptions
 
 plugins {
     id(GradlePluginId.ANDROID_APPLICATION)
@@ -82,6 +81,11 @@ dependencies {
     implementation(LibraryDependency.PAHO_SERVICE)
 
     implementation(LibraryDependency.KLAXON)
+
+    implementation(LibraryDependency.ROOM_RUNTIME)
+    implementation(LibraryDependency.ROOM_RXJAVA)
+    annotationProcessor(LibraryDependency.ROOM_COMPILER)
+    implementation(LibraryDependency.RXANDROID)
 
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFIT_MOSHI_CONVERTER)
