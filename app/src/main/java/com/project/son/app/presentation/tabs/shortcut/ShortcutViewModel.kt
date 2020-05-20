@@ -1,5 +1,6 @@
 package com.project.son.app.presentation.tabs.shortcut
 
+import com.project.son.app.domain.ShortcutDomainModel
 import com.project.son.library.base.presentation.viewmodel.BaseAction
 import com.project.son.library.base.presentation.viewmodel.BaseViewModel
 import com.project.son.library.base.presentation.viewmodel.BaseViewState

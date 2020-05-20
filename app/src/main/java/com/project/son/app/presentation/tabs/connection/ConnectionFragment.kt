@@ -24,7 +24,11 @@ import com.beust.klaxon.Klaxon
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.Result
 import com.project.son.R
-import com.project.son.app.presentation.tabs.connection.enum.ConnectionType
+import com.project.son.app.helper.classes.MQTTHandler
+import com.project.son.app.helper.enum.ConnectionType
+import com.project.son.app.helper.interfaces.IMQTTListener
+import com.project.son.app.helper.model.DeviceModel
+import com.project.son.app.helper.model.FailureModel
 import com.project.son.library.base.presentation.fragment.BaseContainerFragment
 import kotlinx.android.synthetic.main.fragment_connection.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -62,9 +66,10 @@ class ConnectionFragment : BaseContainerFragment() {
     private fun initDeviceCodeText() {
         edt_device_code.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (s!!.isNotBlank() && s.length == 7 && s.matches("^[0-9]*".toRegex()))
-                    enableConnectionActions()
-                else showSnackbar("کد معتبر نیست", false)
+                if (s!!.isNotBlank())
+                    if (s.length == 7)
+                        enableConnectionActions()
+                    else disableConnectionActions()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -76,12 +81,33 @@ class ConnectionFragment : BaseContainerFragment() {
     }
 
     private fun enableConnectionActions() {
+        hideKeyboard(requireActivity())
         showSnackbar("کد به درستی دریافت شد.", true)
         txv_choose_connection.visibility = VISIBLE
         ctl_connection.visibility = VISIBLE
         img_sms.isEnabled = true
         img_internet.isEnabled = true
 //                img_bluetooth.isEnabled = true
+    }
+
+    private fun disableConnectionActions() {
+        showSnackbar("کد معتبر نیست", false)
+        txv_choose_connection.visibility = INVISIBLE
+        ctl_connection.visibility = INVISIBLE
+        txv_choose_floor.visibility = INVISIBLE
+        npk_floor.visibility = INVISIBLE
+        btn_send_command.visibility = INVISIBLE
+
+        connectionType = ConnectionType.NONE
+        cpb_sms.backgroundProgressBarColor =
+            ContextCompat.getColor(requireContext(), R.color.color_connection_disconnected)
+        cpb_sms.indeterminateMode = false
+        cpb_internet.backgroundProgressBarColor =
+            ContextCompat.getColor(requireContext(), R.color.color_connection_disconnected)
+        cpb_internet.indeterminateMode = false
+        cpb_bluetooth.backgroundProgressBarColor =
+            ContextCompat.getColor(requireContext(), R.color.color_connection_disconnected)
+        cpb_bluetooth.indeterminateMode = false
     }
 
     private fun callScanner(scannerView: ZXingScannerView?) {
@@ -103,7 +129,7 @@ class ConnectionFragment : BaseContainerFragment() {
 
     private fun readDataFromQrCode(qrCodeData: Result?) {
         try {
-            Klaxon().parse<Device>(qrCodeData!!.text)?.apply {
+            Klaxon().parse<DeviceModel>(qrCodeData!!.text)?.apply {
                 scanDeviceCodeAlertDialog.dismiss()
                 edt_device_code.setText(this.id)
                 edt_device_code.setSelection(this.id.length);
@@ -190,7 +216,8 @@ class ConnectionFragment : BaseContainerFragment() {
     }
 
     private fun initMqtt() {
-        MQTTHandler.setup(object : IMQTTListener {
+        MQTTHandler.setup(object :
+            IMQTTListener {
             override fun onConnectionSuccessful(response: IMqttToken) {
                 showSnackbar("اتصال با سرور برقرار شد", true)
 

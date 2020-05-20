@@ -1,4 +1,4 @@
-package com.project.son.app.presentation.tabs.connection
+package com.project.son.app.helper.model
 
 import org.eclipse.paho.client.mqttv3.MqttMessage
 

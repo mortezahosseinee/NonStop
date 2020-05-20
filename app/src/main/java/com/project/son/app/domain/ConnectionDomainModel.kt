@@ -1,4 +1,4 @@
-package com.project.son.app.presentation.tabs.connection
+package com.project.son.app.domain
 
 internal data class ConnectionDomainModel(
     val name: String,

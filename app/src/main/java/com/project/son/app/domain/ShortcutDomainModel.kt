@@ -1,4 +1,4 @@
-package com.project.son.app.presentation.tabs.shortcut
+package com.project.son.app.domain
 
 internal data class ShortcutDomainModel(
     val name: String,

@@ -1,4 +1,4 @@
-package com.project.son.app.presentation.tabs.connection.enum
+package com.project.son.app.helper.enum
 
 enum class ConnectionType {
     NONE,

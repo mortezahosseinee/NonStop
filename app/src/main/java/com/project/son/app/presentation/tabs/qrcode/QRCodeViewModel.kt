@@ -1,5 +1,6 @@
 package com.project.son.app.presentation.tabs.qrcode
 
+import com.project.son.app.domain.QRCodeDomainModel
 import com.project.son.library.base.presentation.viewmodel.BaseAction
 import com.project.son.library.base.presentation.viewmodel.BaseViewModel
 import com.project.son.library.base.presentation.viewmodel.BaseViewState

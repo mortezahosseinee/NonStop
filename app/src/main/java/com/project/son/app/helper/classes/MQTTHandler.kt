@@ -1,6 +1,9 @@
-package com.project.son.app.presentation.tabs.connection
+package com.project.son.app.helper.classes
 
 import android.content.Context
+import com.project.son.app.helper.interfaces.IMQTTListener
+import com.project.son.app.helper.model.FailureModel
+import com.project.son.app.helper.model.MessageModel
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import timber.log.Timber
@@ -29,15 +32,27 @@ class MQTTHandler {
 
                 client?.setCallback(object : MqttCallback {
                     override fun connectionLost(cause: Throwable) {
-                        _mPublisherIMQTTListener?.onConnectionToBrokerLost(FailureModel(cause.message ?: ""))
-                        _mIMQTTListener?.onConnectionToBrokerLost(FailureModel(cause.message ?: ""))
+                        _mPublisherIMQTTListener?.onConnectionToBrokerLost(
+                            FailureModel(
+                                cause.message ?: ""
+                            )
+                        )
+                        _mIMQTTListener?.onConnectionToBrokerLost(
+                            FailureModel(
+                                cause.message ?: ""
+                            )
+                        )
                         Timber.w("Connection to broker Lost.")
                         connected = false
                     }
 
                     override fun messageArrived(topic: String?, message: MqttMessage?) {
                         try {
-                            _mPublisherIMQTTListener?.onMessageArrived(MessageModel(topic ?: "", message!!))
+                            _mPublisherIMQTTListener?.onMessageArrived(
+                                MessageModel(
+                                    topic ?: "", message!!
+                                )
+                            )
                             Timber.i("Message Arrived.")
                         } catch (e: Exception) {
                             Timber.e(e)
@@ -71,7 +86,9 @@ class MQTTHandler {
                         exception: Throwable
                     ) {
                         // Something went wrong e.g. connection timeout or firewall problems
-                        _mIMQTTListener?.onConnectionFailure(FailureModel(exception.message!!))
+                        _mIMQTTListener?.onConnectionFailure(
+                            FailureModel(exception.message!!)
+                        )
                         Timber.e("Connection to broker Failed")
                         connected = false
 
@@ -98,7 +115,9 @@ class MQTTHandler {
             }
 
             if (mPublishToken == null)
-                _mPublisherIMQTTListener?.onPublishFailure(FailureModel("Publish token is null."))
+                _mPublisherIMQTTListener?.onPublishFailure(
+                    FailureModel("Publish token is null.")
+                )
             else
                 mPublishToken.actionCallback = object : IMqttActionListener {
                     override fun onSuccess(asyncActionToken: IMqttToken?) {
@@ -111,7 +130,11 @@ class MQTTHandler {
 
                     override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable) {
                         try {
-                            _mPublisherIMQTTListener?.onPublishFailure(FailureModel(exception.message!!))
+                            _mPublisherIMQTTListener?.onPublishFailure(
+                                FailureModel(
+                                    exception.message!!
+                                )
+                            )
                         } catch (e: Exception) {
                         }
                         Timber.e("Publishing Failed.")
@@ -138,7 +161,11 @@ class MQTTHandler {
                             asyncActionToken: IMqttToken?,
                             exception: Throwable
                         ) {
-                            _mIMQTTListener?.onSubscribeFailure(FailureModel(exception.message!!))
+                            _mIMQTTListener?.onSubscribeFailure(
+                                FailureModel(
+                                    exception.message!!
+                                )
+                            )
                             Timber.e("Subscribe Failed.")
                         }
                     }

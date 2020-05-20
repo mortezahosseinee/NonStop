@@ -1,5 +1,7 @@
-package com.project.son.app.presentation.tabs.connection
+package com.project.son.app.helper.interfaces
 
+import com.project.son.app.helper.model.FailureModel
+import com.project.son.app.helper.model.MessageModel
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.IMqttToken
 

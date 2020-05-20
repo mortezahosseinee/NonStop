@@ -1,4 +1,4 @@
-package com.project.son.app.presentation.tabs.qrcode
+package com.project.son.app.domain
 
 internal data class QRCodeDomainModel(
     val name: String,

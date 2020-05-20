@@ -17,8 +17,6 @@ class ShortcutFragment : BaseContainerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val context = requireContext()
-
         setTextFont()
     }
 

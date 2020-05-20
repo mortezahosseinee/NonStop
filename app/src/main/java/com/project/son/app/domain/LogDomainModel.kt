@@ -1,4 +1,4 @@
-package com.project.son.app.presentation.tabs.log
+package com.project.son.app.domain
 
 internal data class LogDomainModel(
     val name: String,

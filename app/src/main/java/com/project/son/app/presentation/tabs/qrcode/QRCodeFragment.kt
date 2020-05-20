@@ -52,7 +52,7 @@ class QRCodeFragment : BaseContainerFragment() {
 
     private fun createQRCodeCommand(floor: Int) {
         val bitmapQrCode = QRCodeHelper(requireContext())
-            .setContent(npk_floor.value.toString())
+            .setContent(floor.toString())
             ?.setErrorCorrectionLevel(ErrorCorrectionLevel.Q)
             ?.setMargin(2)
             ?.getQRCOde()
