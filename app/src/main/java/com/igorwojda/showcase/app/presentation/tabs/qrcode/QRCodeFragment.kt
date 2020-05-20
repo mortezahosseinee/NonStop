@@ -23,8 +23,6 @@ class QRCodeFragment : BaseContainerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val context = requireContext()
-
         setTextFont()
         initNumberPicker()
         createQRCodeCommand(0)

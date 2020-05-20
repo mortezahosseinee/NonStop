@@ -81,6 +81,8 @@ dependencies {
     implementation(LibraryDependency.PAHO_CLIENT)
     implementation(LibraryDependency.PAHO_SERVICE)
 
+    implementation(LibraryDependency.KLAXON)
+
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFIT_MOSHI_CONVERTER)
     api(LibraryDependency.SUPPORT_CONSTRAINT_LAYOUT)
