@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.igorwojda.showcase">
+          package="com.project.son">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".app.ShowcaseApplication"
+        android:name="com.project.son.app.MyApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +24,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity android:name="com.igorwojda.showcase.app.presentation.main.MainActivity">
+        <activity android:name=".app.presentation.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>

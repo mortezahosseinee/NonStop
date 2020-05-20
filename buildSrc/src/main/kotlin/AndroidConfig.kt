@@ -7,7 +7,7 @@ object AndroidConfig {
     const val VERSION_CODE = 1
     const val VERSION_NAME = "1.0"
 
-    const val ID = "com.igorwojda.showcase"
+    const val ID = "com.project.son"
     const val TEST_INSTRUMENTATION_RUNNER = "android.support.test.runner.AndroidJUnitRunner"
 }
 
