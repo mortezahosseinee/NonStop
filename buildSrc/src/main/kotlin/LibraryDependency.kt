@@ -14,6 +14,7 @@ private object LibraryVersion {
     const val ROOM_RXJAVA = "2.2.2"
     const val ROOM_COMPILER = "2.2.2"
     const val RXANDROID = "2.1.1"
+    const val NUMBER_PICKER = "2.4.9"
     const val TIMBER = "4.7.1"
     const val PLAY_CORE = "1.6.4"
     const val APP_COMPAT = "1.1.0"
@@ -63,6 +64,8 @@ object LibraryDependency {
     const val ROOM_RXJAVA = "androidx.room:room-rxjava2:${LibraryVersion.ROOM_RXJAVA}"
     const val ROOM_COMPILER = "androidx.room:room-compiler:${LibraryVersion.ROOM_COMPILER}"
     const val RXANDROID = "io.reactivex.rxjava2:rxandroid:${LibraryVersion.RXANDROID}"
+
+    const val NUMBER_PICKER = "com.shawnlin:number-picker:${LibraryVersion.NUMBER_PICKER}"
 
     const val TIMBER = "com.jakewharton.timber:timber:${LibraryVersion.TIMBER}"
     const val SUPPORT_CONSTRAINT_LAYOUT =

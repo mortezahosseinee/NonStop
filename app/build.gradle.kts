@@ -87,6 +87,8 @@ dependencies {
     annotationProcessor(LibraryDependency.ROOM_COMPILER)
     implementation(LibraryDependency.RXANDROID)
 
+    implementation(LibraryDependency.NUMBER_PICKER)
+
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFIT_MOSHI_CONVERTER)
     api(LibraryDependency.SUPPORT_CONSTRAINT_LAYOUT)

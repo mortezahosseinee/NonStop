@@ -1,12 +1,15 @@
 package com.project.son.app.view.tabs.connection.presentation
 
 import android.Manifest
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.speech.RecognizerIntent
 import android.telephony.SmsManager
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,21 +22,25 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import com.beust.klaxon.Klaxon
-import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.Result
 import com.project.son.R
 import com.project.son.app.helper.classes.MQTTHandler
+import com.project.son.app.helper.classes.VoiceToSpeechHelper
 import com.project.son.app.helper.enum.ConnectionType
 import com.project.son.app.helper.interfaces.IMQTTListener
 import com.project.son.app.helper.model.DeviceModel
 import com.project.son.app.helper.model.FailureModel
 import com.project.son.library.base.presentation.fragment.BaseContainerFragment
 import kotlinx.android.synthetic.main.fragment_connection.*
+import kotlinx.android.synthetic.main.fragment_connection.img_record
+import kotlinx.android.synthetic.main.fragment_connection.npk_floor
+import kotlinx.android.synthetic.main.fragment_connection.txv_choose_floor
+import kotlinx.android.synthetic.main.fragment_qr_code.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.eclipse.paho.client.mqttv3.IMqttToken
 import org.kodein.di.generic.instance
+import java.util.*
 import kotlin.text.Charsets.UTF_8
 
 class ConnectionFragment : BaseContainerFragment() {
@@ -45,6 +52,7 @@ class ConnectionFragment : BaseContainerFragment() {
 
     private val MY_SEND_SMS_REQUEST_CODE = 1000
     private val MY_CAMERA_REQUEST_CODE = 2000
+    private var REQ_CODE_SPEECH_INPUT = 3000
 
     private val viewModel: ConnectionViewModel by instance()
 
@@ -61,6 +69,55 @@ class ConnectionFragment : BaseContainerFragment() {
         initSendCommand()
         initScanDeviceCode()
         initDeviceCodeText()
+        initVoiceInput()
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQ_CODE_SPEECH_INPUT -> {
+                if (resultCode == Activity.RESULT_OK && null != data) {
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+
+                    val floorPair = VoiceToSpeechHelper.getFloor(result)
+                    when (floorPair.second) {
+                        true -> scrollNumberPicker(floorPair.first.toInt())
+                        false -> showSnackbar(floorPair.first, false)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun scrollNumberPicker(floor: Int) {
+        npk_floor.value = floor
+    }
+
+    private fun initVoiceInput() {
+        img_record.setOnClickListener {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            intent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fa_IR")
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, Locale("fa_IR"))
+            intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, Locale("fa_IR"))
+            intent.putExtra(
+                RecognizerIntent.EXTRA_PROMPT,
+                "speech_prompt"
+            )
+            try {
+                startActivityForResult(intent, REQ_CODE_SPEECH_INPUT)
+            } catch (a: ActivityNotFoundException) {
+                showSnackbar("دریافت اطلاعات صوتی در دستگاه شما، پشتیبانی نمی شود.", false)
+            }
+        }
     }
 
     private fun initDeviceCodeText() {
@@ -95,6 +152,7 @@ class ConnectionFragment : BaseContainerFragment() {
         txv_choose_connection.visibility = INVISIBLE
         ctl_connection.visibility = INVISIBLE
         txv_choose_floor.visibility = INVISIBLE
+        img_record.visibility = INVISIBLE
         npk_floor.visibility = INVISIBLE
         btn_send_command.visibility = INVISIBLE
 
@@ -147,6 +205,7 @@ class ConnectionFragment : BaseContainerFragment() {
             txv_choose_connection.visibility = INVISIBLE
             ctl_connection.visibility = INVISIBLE
             txv_choose_floor.visibility = INVISIBLE
+            img_record.visibility = INVISIBLE
             npk_floor.visibility = INVISIBLE
             btn_send_command.visibility = INVISIBLE
 
@@ -235,6 +294,7 @@ class ConnectionFragment : BaseContainerFragment() {
                 img_internet.isEnabled = false
 //                img_bluetooth.isEnabled = true
                 txv_choose_floor.visibility = VISIBLE
+                img_record.visibility = VISIBLE
                 npk_floor.visibility = VISIBLE
                 btn_send_command.visibility = VISIBLE
             }
@@ -256,6 +316,7 @@ class ConnectionFragment : BaseContainerFragment() {
                 img_internet.isEnabled = true
 //                img_bluetooth.isEnabled = true
                 txv_choose_floor.visibility = INVISIBLE
+                img_record.visibility = INVISIBLE
                 npk_floor.visibility = INVISIBLE
                 btn_send_command.visibility = INVISIBLE
             }
@@ -277,6 +338,7 @@ class ConnectionFragment : BaseContainerFragment() {
                 img_internet.isEnabled = true
 //                img_bluetooth.isEnabled = true
                 txv_choose_floor.visibility = INVISIBLE
+                img_record.visibility = INVISIBLE
                 npk_floor.visibility = INVISIBLE
                 btn_send_command.visibility = INVISIBLE
             }
@@ -311,38 +373,13 @@ class ConnectionFragment : BaseContainerFragment() {
                 val smsManager: SmsManager = SmsManager.getDefault()
                 smsManager.sendTextMessage(
                     "+989059661346", null,
-                    "${edt_device_code.text}@@*${npk_floor.value}@@${edt_device_code.text}",
+                    "${edt_device_code.text}@@${npk_floor.value}@@${edt_device_code.text}",
                     null, null
                 )
                 showSnackbar("فرمان ارسال شد", true)
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
-    }
-
-    private fun showSnackbar(message: String, positivity: Boolean) {
-        try {
-            val mSnackbar = Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
-            mSnackbar.setTextColor(if (positivity) Color.GREEN else Color.RED)
-            mSnackbar.setActionTextColor(Color.WHITE)
-
-            val txvSnackbarMessage = mSnackbar.view.findViewById<TextView>(R.id.snackbar_text)
-            val txvSnackbarAction = mSnackbar.view.findViewById<TextView>(R.id.snackbar_action)
-
-            ViewCompat.setLayoutDirection(mSnackbar.view, ViewCompat.LAYOUT_DIRECTION_RTL);
-
-            Typeface.createFromAsset(
-                context?.assets,
-                "iransans_fa.ttf"
-            ).let {
-                txvSnackbarMessage.typeface = it
-                txvSnackbarAction.typeface = it
-            }
-            mSnackbar.setAction("تأیید") {
-                mSnackbar.dismiss()
-            }.show()
-        } catch (ignore: Exception) {
-        }
     }
 
     private fun sendInternetCommand() {
@@ -384,6 +421,7 @@ class ConnectionFragment : BaseContainerFragment() {
             img_internet.isEnabled = true
 //            img_bluetooth.isEnabled = true
             txv_choose_floor.visibility = VISIBLE
+            img_record.visibility = VISIBLE
             npk_floor.visibility = VISIBLE
             btn_send_command.visibility = VISIBLE
         }
@@ -406,6 +444,7 @@ class ConnectionFragment : BaseContainerFragment() {
             img_internet.isEnabled = false
 //            img_bluetooth.isEnabled = true
             txv_choose_floor.visibility = INVISIBLE
+            img_record.visibility = INVISIBLE
             npk_floor.visibility = INVISIBLE
             btn_send_command.visibility = INVISIBLE
         }
@@ -427,6 +466,7 @@ class ConnectionFragment : BaseContainerFragment() {
             img_internet.isEnabled = true
             img_bluetooth.isEnabled = false
             txv_choose_floor.visibility = INVISIBLE
+            img_record.visibility = INVISIBLE
             npk_floor.visibility = INVISIBLE
             btn_send_command.visibility = INVISIBLE
         }
@@ -441,20 +481,12 @@ class ConnectionFragment : BaseContainerFragment() {
             txv_choose_floor.typeface = it
             btn_send_command.typeface = it
             edt_device_code.typeface = it
+            npk_floor.setSelectedTypeface(it)
         }
     }
 
     private fun initNumberPicker() {
-        val minValue = -10
-        val maxValue = 50
-
-        npk_floor.let {
-            it.minValue = 0
-            it.maxValue = maxValue - minValue
-            it.value = 0 - minValue
-            it.setFormatter { value -> (value + minValue).toString() }
-            it.setOnValueChangedListener { picker, oldVal, newVal -> run {} }
-        }
+        npk_floor.setOnValueChangedListener { picker, oldVal, newVal -> run {} }
     }
 
     private fun runFailedHandler() {
@@ -479,6 +511,7 @@ class ConnectionFragment : BaseContainerFragment() {
                 img_internet.isEnabled = true
 //                img_bluetooth.isEnabled = true
                 txv_choose_floor.visibility = INVISIBLE
+                img_record.visibility = INVISIBLE
                 npk_floor.visibility = INVISIBLE
                 btn_send_command.visibility = INVISIBLE
             }
