@@ -6,31 +6,91 @@
     android:layout_height="match_parent"
     tools:context=".app.view.main.MainActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/tab_layout_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="center"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabIndicatorHeight="4dp"
-        app:tabMinWidth="100dp"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextAppearance="@style/tabLayoutText"
-        app:tabTextColor="#000" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ctl_splash"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tabLayout"
-        app:layout_constraintStart_toStartOf="@+id/tabLayout"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="آساهو"
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TM"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/txv_title"
+            app:layout_constraintEnd_toStartOf="@+id/txv_title"
+            app:layout_constraintStart_toStartOf="@+id/txv_title"
+            app:layout_constraintTop_toTopOf="@+id/txv_title" />
+
+        <TextView
+            android:id="@+id/txv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="نسخه 1.0.0"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ctl_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/tab_layout_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="4dp"
+            app:tabMinWidth="100dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextAppearance="@style/tabLayoutText"
+            app:tabTextColor="#000" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tabLayout"
+            app:layout_constraintStart_toStartOf="@+id/tabLayout"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,10 @@
 package com.project.son.app.view.main
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.project.son.R
@@ -10,6 +14,7 @@ import com.project.son.app.view.tabs.qrcode.presentation.QRCodeFragment
 import com.project.son.app.view.tabs.shortcut.ShortcutFragment
 import com.project.son.library.base.presentation.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_connection.*
 
 class MainActivity : BaseActivity() {
 
@@ -21,8 +26,30 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setTextFont()
         initViewPager()
         initTabLayout()
+
+        Handler().postDelayed({
+            ctl_splash.visibility = INVISIBLE
+            ctl_view.visibility = VISIBLE
+        }, 1500)
+    }
+
+    private fun setTextFont() {
+        Typeface.createFromAsset(
+            assets,
+            "yagut_fa_b.ttf"
+        ).let {
+            txv_title.typeface = it
+        }
+
+        Typeface.createFromAsset(
+            assets,
+            "yagut_fa.ttf"
+        ).let {
+            txv_version.typeface = it
+        }
     }
 
     private fun initViewPager() {

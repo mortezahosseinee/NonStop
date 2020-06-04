@@ -106,7 +106,7 @@ class MQTTHandler {
             command: ByteArray
         ) {
             _mPublisherIMQTTListener = mIMQTTListener
-            publishTopic = topic
+            publishTopic = "nonstop/$topic"
 
             var mPublishToken: IMqttDeliveryToken? = null
             try {
