@@ -19,16 +19,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_scan_device_code"
+            <me.dm7.barcodescanner.zxing.ZXingScannerView
+                android:id="@+id/zxing_device_code"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_scan_device_code" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--            <androidx.appcompat.widget.AppCompatImageView-->
+            <!--                android:id="@+id/img_scan_device_code"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="48dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintDimensionRatio="1:1"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:srcCompat="@drawable/ic_scan_device_code" />-->
 
             <EditText
                 android:id="@+id/edt_device_code"
@@ -44,7 +54,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_scan_device_code"
+                app:layout_constraintStart_toEndOf="@+id/zxing_device_code"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="Autofill" />
 
@@ -159,42 +169,42 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ctl_connection"
-            app:srcCompat="@drawable/ic_record_audio" />
-
         <TextView
             android:id="@+id/txv_choose_floor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="start"
             android:text="@string/choose_the_floor"
             android:textColor="#000"
             android:textSize="18sp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/img_record"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_record"
-            app:layout_constraintTop_toTopOf="@+id/img_record" />
+            app:layout_constraintBottom_toTopOf="@+id/npk_floor"
+            app:layout_constraintEnd_toEndOf="@id/ctl_connection"
+            app:layout_constraintStart_toStartOf="@id/ctl_connection" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/npk_floor"
+            app:layout_constraintEnd_toEndOf="@id/txv_choose_floor"
+            app:layout_constraintTop_toTopOf="@id/npk_floor"
+            app:srcCompat="@drawable/ic_record_audio" />
 
         <com.shawnlin.numberpicker.NumberPicker
             android:id="@+id/npk_floor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/txv_choose_floor"
-            app:layout_constraintStart_toStartOf="@+id/img_record"
-            app:layout_constraintTop_toBottomOf="@+id/txv_choose_floor"
+            app:layout_constraintBottom_toTopOf="@+id/btn_send_command"
+            app:layout_constraintEnd_toStartOf="@id/img_record"
+            app:layout_constraintStart_toStartOf="@+id/txv_choose_floor"
             app:np_dividerColor="@color/colorPrimary"
             app:np_height="180dp"
             app:np_max="10"
@@ -207,11 +217,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="ارسال فرمان"
+            android:text="تأیید"
             android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/npk_floor" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

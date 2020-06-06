@@ -1,10 +1,14 @@
 package com.project.son.app.view.main
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.project.son.R
@@ -20,6 +24,7 @@ class MainActivity : BaseActivity() {
 
     private var userScrollChange = false
     private var previousState: Int = 0
+    private val MY_CAMERA_REQUEST_CODE = 2000
 
     override val layoutResId = R.layout.activity_main
 
@@ -29,11 +34,25 @@ class MainActivity : BaseActivity() {
         setTextFont()
         initViewPager()
         initTabLayout()
+        initCameraPermission()
 
         Handler().postDelayed({
             ctl_splash.visibility = INVISIBLE
             ctl_view.visibility = VISIBLE
         }, 1500)
+    }
+
+    private fun initCameraPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_DENIED
+        )
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                MY_CAMERA_REQUEST_CODE
+            )
     }
 
     private fun setTextFont() {

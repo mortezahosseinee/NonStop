@@ -5,14 +5,16 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import com.pawegio.kandroid.runOnUiThread
 import com.project.son.R
 import com.project.son.app.helper.classes.VoiceToSpeechHelper.getFloor
 import com.project.son.app.view.tabs.qrcode.helper.QRCodeHelper
@@ -24,6 +26,8 @@ import java.util.*
 class QRCodeFragment : BaseContainerFragment() {
 
     private var REQ_CODE_SPEECH_INPUT = 3000
+
+    private var alertDialog: AlertDialog? = null
 
     private val viewModel: QRCodeViewModel by instance()
 
@@ -120,14 +124,16 @@ class QRCodeFragment : BaseContainerFragment() {
 
         val txvQrCodeScan: TextView = dialogView.findViewById(R.id.txv_qr_code_scan)
         val imgQrCode: ImageView = dialogView.findViewById(R.id.img_qr_code)
-        val btnQrCodeScanDone: Button = dialogView.findViewById(R.id.btn_qr_code_scan_done)
+        val imgClose: ImageView = dialogView.findViewById(R.id.img_close)
+        val prgShowQrCode: ProgressBar = dialogView.findViewById(R.id.prg_show_qr_code)
+
+        runProgressbar(prgShowQrCode, 0)
 
         Typeface.createFromAsset(
             context?.assets,
             "iransans_fa.ttf"
         ).let {
             txvQrCodeScan.typeface = it
-            btnQrCodeScanDone.typeface = it
         }
 
         imgQrCode.setImageDrawable(img_command.drawable)
@@ -136,11 +142,26 @@ class QRCodeFragment : BaseContainerFragment() {
         dialogBuilder.setOnDismissListener { }
         dialogBuilder.setView(dialogView)
 
-        val alertDialog = dialogBuilder.create()
-        alertDialog.show()
+        alertDialog = dialogBuilder.create()
+        alertDialog?.show()
 
-        btnQrCodeScanDone.setOnClickListener {
-            alertDialog.dismiss()
+        imgClose.setOnClickListener {
+            alertDialog?.dismiss()
         }
+    }
+
+    private fun runProgressbar(prgShowQrCode: ProgressBar, percent: Int) {
+        prgShowQrCode.progress = percent
+
+        if (percent == 100) {
+            alertDialog?.dismiss()
+            return
+        }
+
+        Handler().postDelayed({
+            runOnUiThread {
+                runProgressbar(prgShowQrCode, percent + 1)
+            }
+        }, 50)
     }
 }

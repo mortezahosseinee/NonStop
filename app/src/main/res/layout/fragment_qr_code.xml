@@ -6,15 +6,16 @@
     android:background="@color/white">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:id="@+id/img_command"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
-        android:padding="8dp"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_record_audio" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txv_choose_floor"
@@ -26,19 +27,28 @@
         android:text="@string/choose_the_floor"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_record"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_record"
-        app:layout_constraintTop_toTopOf="@+id/img_record" />
+        app:layout_constraintEnd_toEndOf="@id/img_command"
+        app:layout_constraintStart_toStartOf="@id/img_command"
+        app:layout_constraintTop_toBottomOf="@+id/img_command" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/npk_floor"
+        app:layout_constraintEnd_toEndOf="@id/txv_choose_floor"
+        app:layout_constraintTop_toTopOf="@id/npk_floor"
+        app:srcCompat="@drawable/ic_record_audio" />
 
     <com.shawnlin.numberpicker.NumberPicker
         android:id="@+id/npk_floor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/txv_choose_floor"
-        app:layout_constraintStart_toStartOf="@+id/img_record"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@id/img_record"
+        app:layout_constraintStart_toStartOf="@+id/txv_choose_floor"
         app:layout_constraintTop_toBottomOf="@+id/txv_choose_floor"
         app:np_dividerColor="@color/colorPrimary"
         app:np_height="180dp"
@@ -46,18 +56,5 @@
         app:np_min="-1"
         app:np_textSize="18sp"
         app:np_value="0" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_command"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@+id/npk_floor"
-        app:layout_constraintStart_toStartOf="@+id/npk_floor"
-        app:layout_constraintTop_toBottomOf="@+id/npk_floor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

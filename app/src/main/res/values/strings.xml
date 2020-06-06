@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">NonStop</string>
 
-    <string name="qr_code_tab">کد QR</string>
-    <string name="connection_tab">اتصال</string>
+    <string name="qr_code_tab">QR</string>
+    <string name="connection_tab">فرمان بیسیم</string>
     <string name="shortcut_tab">میانبرها</string>
     <string name="log_tab">تاریخچه</string>
-    <string name="choose_the_floor">طبقه مورد نظر را انتخاب کنید:</string>
+    <string name="choose_the_floor">طبقه مقصد را انتخاب کنید:</string>
     <string name="choose_the_connection">روش اتصال را انتخاب کنید:</string>
 
 </resources>

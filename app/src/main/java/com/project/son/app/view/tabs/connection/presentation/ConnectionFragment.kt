@@ -200,7 +200,9 @@ class ConnectionFragment : BaseContainerFragment() {
     }
 
     private fun initScanDeviceCode() {
-        img_scan_device_code.setOnClickListener {
+        zxing_device_code.startCamera()
+
+        zxing_device_code.setOnClickListener {
             edt_device_code.setText("")
             txv_choose_connection.visibility = INVISIBLE
             ctl_connection.visibility = INVISIBLE
@@ -264,6 +266,7 @@ class ConnectionFragment : BaseContainerFragment() {
 
         scanDeviceCodeAlertDialog.setOnDismissListener {
             stopScanner(zxingDeviceCode)
+            zxing_device_code.startCamera()
         }
         scanDeviceCodeAlertDialog.show()
 
